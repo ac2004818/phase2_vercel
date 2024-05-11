@@ -15,7 +15,7 @@ export async function POST(request) {
         },
       });
     } catch (error) {
-      user = await prisma.buyer.findUnique({
+      user = await prisma.buyer.findMany({
         where: {
           username,
         },
@@ -29,7 +29,7 @@ export async function POST(request) {
           },
         });
       } catch (error) {
-        user = await prisma.seller.findUnique({
+        user = await prisma.seller.findMany({
           where: {
             username: username,
           },
