@@ -15,9 +15,9 @@ export async function POST(request) {
         },
       });
     } catch (error) {
-      user = await prisma.buyer.findMany({
+      user = await prisma.transaction.findMany({
         where: {
-          username,
+          id: 1,
         },
       });
     }
