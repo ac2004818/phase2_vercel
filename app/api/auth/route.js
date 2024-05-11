@@ -8,21 +8,39 @@ export async function POST(request) {
   const { username, password } = await request.json();
   let user = {};
   try {
-    user = await prisma.seller.findUnique({
-      where: {
-        username: username,
-      },
-    });
-    if (!user && (user ?? {}).password !== password) {
-      user = await prisma.buyer.findUnique({
+    try {
+      user = await prisma.seller.findUnique({
         where: {
-          username,
+          username: username,
         },
       });
+    } catch (error) {
+      user = await prisma.seller.findUnique({
+        where: {
+          username: username,
+        },
+      });
+    }
+    if (!user && (user ?? {}).password !== password) {
+      try {
+        user = await prisma.buyer.findUnique({
+          where: {
+            username,
+          },
+        });
+      } catch (error) {
+        user = await prisma.buyer.findUnique({
+          where: {
+            username,
+          },
+        });
+      }
 
       // If user is not found or password is incorrect for seller as well, throw an error
       if (!user || (user ?? {}).password !== password) {
-        throw new Error(`Invalid username or password error ${username} ${password}`);
+        throw new Error(
+          `Invalid username or password a ${username} ${password}`
+        );
       }
     }
 
