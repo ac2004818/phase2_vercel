@@ -2,10 +2,10 @@
 
 import { PrismaClient } from "@prisma/client";
 
-export async function POST(request) {
+export async function GET(request) {
   const prisma = new PrismaClient();
 
-  const { username, password } = await request.json();
+  const { username, password } = { username:"applestore", password:"apple123" };
   let user = {};
   try {
     try {
