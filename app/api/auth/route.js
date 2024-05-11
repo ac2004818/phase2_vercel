@@ -8,13 +8,13 @@ export async function POST(request) {
   const { username, password } = await request.json();
   let user = {};
   try {
-    user = await prisma.buyer.findUnique({
+    user = await prisma.seller.findUnique({
       where: {
         username: username,
       },
     });
     if (!user && (user ?? {}).password !== password) {
-      user = await prisma.seller.findUnique({
+      user = await prisma.buyer.findUnique({
         where: {
           username,
         },
