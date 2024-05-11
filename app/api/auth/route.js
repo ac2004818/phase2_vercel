@@ -22,7 +22,7 @@ export async function POST(request) {
 
       // If user is not found or password is incorrect for seller as well, throw an error
       if (!user || (user ?? {}).password !== password) {
-        throw new Error(`Invalid username or password ${username} ${password}`);
+        throw new Error(`Invalid username or password error ${username} ${password}`);
       }
     }
 
