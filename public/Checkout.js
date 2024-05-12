@@ -105,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 )}`;
               } else {
                 alert("Purchase failed");
+                 alert(responseData.error);
                 throw new Error("Purchase failed");
               }
             })
