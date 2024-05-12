@@ -173,10 +173,12 @@ class DataRepository {
           );
         }
       }
-
       return user;
     } catch (error) {
-      throw new Error("Error during login: " + error.message);
+      this.disconnect();
+      throw new Error(
+        ` Error during login: ${username} ${password}` + error.message
+      );
     }
   }
   async addItem(name, price, quantity, sellerId, imageUrl, description) {
