@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             }, Selling Price: ${
                               transaction.totalPrice
                             }, Quantity: ${
-                              transaction.totalPrice
+                              transaction.quantity
                             }, Date: ${convertISOTimeToAMPM(
                               transaction.date
                             )}</li>`;
