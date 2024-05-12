@@ -14,7 +14,7 @@ export async function POST(request) {
         return Response.json({message : 'Purchase successful'});
     } catch (error) {
         Response.statusCode=500;
-        return  Response.json({ error: 'Error processing transaction' });
+        return  Response.json({ error: 'Error processing transaction ' + error.message });
     }
 }
 export async function GET(request) {
