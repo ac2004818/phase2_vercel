@@ -173,12 +173,10 @@ class DataRepository {
           );
         }
       }
+
       return user;
     } catch (error) {
-      this.disconnect();
-      throw new Error(
-        ` Error during login: ${username} ${password}` + error.message
-      );
+      throw new Error("Error during login: " + error.message);
     }
   }
   async addItem(name, price, quantity, sellerId, imageUrl, description) {
@@ -228,7 +226,9 @@ class DataRepository {
       if (!item) {
         throw new Error("Item not found");
       }
-
+      if (item.quantity < quantity) {
+        throw new Error(`the stock is ${item.quantity}`);
+      }
       // Calculate total price
       const totalPrice = item.price * quantity;
 
@@ -264,7 +264,10 @@ class DataRepository {
           },
         },
       });
-
+      await this.prisma.item.update({
+        where: { id: item.id },
+        data: { quantity: item.quantity - quantity },
+      });
       return transaction;
     } catch (error) {
       throw new Error("Error during purchase: " + error.message);
