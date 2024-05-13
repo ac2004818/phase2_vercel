@@ -4,6 +4,9 @@ import DataRepository from '../utils/DataRepository';
  const repo = new DataRepository();
 
 export async function GET(request) {
+ const { searchParams } = new URL(request.url);
+    const t = searchParams.get('t');
+    console.log(t);
   try {
     
     const year = new Date().getFullYear().toString();
